@@ -11,7 +11,6 @@ import torch.nn.functional as F
 from torch.autograd import Variable
 from torchvision.utils import make_grid, save_image
 from torchvision import transforms
-
 from utils import cuda
 import model.model2 as model
 from dataset import return_data

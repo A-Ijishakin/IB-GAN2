@@ -194,62 +194,15 @@ class CustomTensorDataset2(Dataset):
 #
 
 def return_data(args):
-    name = args.dataset
-    dset_dir = args.dset_dir
     batch_size = args.batch_size
-    num_workers = args.num_workers 
-    if name.lower() == 'img_align_celeba':
-        transform = transforms.Compose([
-            #transforms.Resize((64, 64)),
-            transforms.ToTensor(),
-            transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),])
-        train_kwargs = {'root':'/home/rmapaij/HSpace-SAEs/datasets/celeba', 'transform':transform}
-        dset = CustomImageFolder
-    elif name.lower() == '3dchairs':
-        root = os.path.join(dset_dir, '3DChairs')
-        transform = transforms.Compose([
-            #transforms.Resize((64, 64)),
-            #transforms.ToTensor(),
-            #transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),])
-            #transforms.Resize((64, 64)),
-            transforms.ToTensor(),
-            transforms.Normalize((0.5,), (0.5,)),])
-        train_kwargs = {'root':root, 'transform':transform}
-        dset = CustomImageFolder2
-    elif name.lower() == 'dsprites':
-        root = os.path.join(dset_dir, 'dsprites-dataset')
-        transform = preprocess_dsprites
-        data = np.load(os.path.join(root, ('dsprites_ndarray_co1sh3sc6or40x32y32_64x64.npz')),
-                       encoding='latin1')
-        data = torch.from_numpy(data['imgs'])
-        train_kwargs = {'data_tensor':data, 'transform':transform}
-        dset = CustomTensorDataset
-    elif name.lower() == 'cdsprites':
-        root = os.path.join(dset_dir, 'dsprites-dataset')
-        transform = preprocess_dsprites
-        data = np.load(os.path.join(root, ('dsprites_ndarray_co1sh3sc6or40x32y32_64x64.npz')),
-                       encoding='latin1')
-        data = torch.from_numpy(data['imgs'])
-        train_kwargs = {'data_tensor':data, 'transform':transform}
-        dset = CustomTensorDataset2
-    elif name.lower() == 'teapots':
-        root = os.path.join(dset_dir, 'teapots')
-        transform = preprocess_teapots
-        data = np.load(os.path.join(root, ('teapots.npz')))
-        data = torch.from_numpy(data['images'])
-        train_kwargs = {'data_tensor':data, 'transform':transform}
-        dset = CustomTensorDataset
-    elif name.lower() == 'cars':
-        root = os.path.join(dset_dir, 'cars/cars.npz')
-        data = np.load(root, encoding='latin1')
-        data = torch.from_numpy(data['imgs']).float()*2-1
-        train_kwargs = {'data_tensor':data}
-        #dset = CustomTensorDataset
-        dset = CustomTensorDataset3
-    else:
-        root = os.path.join(dset_dir, name)
-        train_kwargs = {'root':root, 'transform':transform}
-        dset = CustomImageFolder
+    num_workers = args.num_workers  
+
+    transform = transforms.Compose([
+        #transforms.Resize((64, 64)),
+        transforms.ToTensor(),
+        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),])
+    train_kwargs = {'root':'/home/rmapaij/HSpace-SAEs/datasets/celeba', 'transform':transform}
+    dset = CustomImageFolder
 
     train_data = dset(**train_kwargs)
     train_loader = DataLoader(train_data,
