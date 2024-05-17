@@ -337,7 +337,7 @@ class Solver(object):
                     obj_klds.append(obj_kld.data)
                     obj_recons.append(obj_recon.data)
                     klds_iters.append(self.global_iter)
-                    obj_Gs.append(obj_G.data)
+                    obj_Gs.append(obj_G.data.clone())
                     self.stat_dict[self.global_iter] = [obj_kld.item(), obj_recon.item(), obj_G.item()]
 
                     self.pbar.write(' ')
