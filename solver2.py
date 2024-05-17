@@ -322,6 +322,7 @@ class Solver(object):
                 #obj_GR = self.alpha * obj_G + -obj_recon + self.beta * obj_kld
                 obj_GR = self.gamma * obj_G.clone() + self.alpha * (-obj_recon) + self.beta * obj_kld
 
+                breakpoint() 
                 # backward & update network params
                 self.D_optim.zero_grad()
                 obj_D.backward(retain_graph=True)
