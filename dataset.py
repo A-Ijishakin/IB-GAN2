@@ -43,9 +43,9 @@ class CustomImageFolder(ImageFolder):
             transforms.ToTensor(),
             transforms.Normalize((0.5,), (0.5,)),]) 
         
-        # if self.transform is not None:
-        #     img1 = self.transform(img1)
-        #     img2 = self.transform(img2) 
+        if self.transform is not None:
+            img1 = self.transform(img1)
+            img2 = self.transform(img2) 
 
         return img1, img2 
 
@@ -197,20 +197,13 @@ def return_data(args):
     name = args.dataset
     dset_dir = args.dset_dir
     batch_size = args.batch_size
-    num_workers = 4
-
-
-    if name.lower() == 'cifar10':
-        root = os.path.join(dset_dir, 'CIFAR10')
-        train_kwargs = {'root':root, 'train':True, 'transform':transform, 'download':True}
-        dset = CIFAR10
-    elif name.lower() == 'celeba':
-        root = os.path.join(dset_dir, 'CelebA')
+    num_workers = args.num_workers 
+    if name.lower() == 'img_align_celeba':
         transform = transforms.Compose([
             #transforms.Resize((64, 64)),
             transforms.ToTensor(),
             transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),])
-        train_kwargs = {'root':root, 'transform':transform}
+        train_kwargs = {'root':'/home/rmapaij/HSpace-SAEs/datasets/CELEB-A/img_align_celeba', 'transform':transform}
         dset = CustomImageFolder
     elif name.lower() == '3dchairs':
         root = os.path.join(dset_dir, '3DChairs')
