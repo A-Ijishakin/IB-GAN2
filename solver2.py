@@ -269,7 +269,7 @@ class Solver(object):
         obj_recons = []
         klds_iters = []
         obj_Gs = []
-
+        torch.autograd.set_detect_anomaly(True) 
         if self.r_weight == 1 and self.r_dim == 10:
             weight = [0.01818182, 0.03636364, 0.05454545, 0.07272727, 0.09090909, 0.10909091, 0.12727273, 0.14545455, 0.16363636, 0.18181818]
             weight = torch.Tensor(weight).cuda().view(1,10)
