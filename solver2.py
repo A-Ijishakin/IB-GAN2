@@ -328,7 +328,7 @@ class Solver(object):
                 self.D_optim.step()
 
                 self.GR_optim.zero_grad()
-                obj_GR.backward()
+                obj_GR.backward(retain_graph=True)
                 self.GR_optim.step()
 
                 # print, visualize, etc
