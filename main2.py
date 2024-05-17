@@ -24,10 +24,8 @@ def main(args):
     net = Solver(args)
     net.train()
 
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='IB-GAN main for (CelebA, 3dChairs)')
-
     # Optimization
     parser.add_argument('--max_iter', default=1e5, type=int, help='training iteration size')
     parser.add_argument('--batch_size', default=64, type=int, help='batch size')

@@ -37,12 +37,17 @@ class CustomImageFolder(ImageFolder):
         path1 = self.imgs[index1][0]
         path2 = self.imgs[index2][0]
         img1 = self.loader(path1)
-        img2 = self.loader(path2)
-        if self.transform is not None:
-            img1 = self.transform(img1)
-            img2 = self.transform(img2)
+        img2 = self.loader(path2) 
+        self.transform = transforms.Compose([ 
+            transforms.Resize((64, 64)),
+            transforms.ToTensor(),
+            transforms.Normalize((0.5,), (0.5,)),]) 
+        
+        # if self.transform is not None:
+        #     img1 = self.transform(img1)
+        #     img2 = self.transform(img2) 
 
-        return img1, img2
+        return img1, img2 
 
 def pil_loader(path):
     with open(path, 'rb') as f:
