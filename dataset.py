@@ -203,7 +203,7 @@ def return_data(args):
             #transforms.Resize((64, 64)),
             transforms.ToTensor(),
             transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),])
-        train_kwargs = {'root':'/home/rmapaij/HSpace-SAEs/datasets/CELEB-A/img_align_celeba', 'transform':transform}
+        train_kwargs = {'root':'/home/rmapaij/HSpace-SAEs/datasets/CELEB-A', 'transform':transform}
         dset = CustomImageFolder
     elif name.lower() == '3dchairs':
         root = os.path.join(dset_dir, '3DChairs')
